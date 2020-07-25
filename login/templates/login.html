@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{%load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <style>
+        @font-face { font-family: 'Cafe24Danjunghae'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff'); font-weight: normal; font-style: normal; }
+    
+    .login{
+        margin: 30px;
+        padding: 20px;
+        border: 1px black solid;
+        border-radius: 20px;
+        background-color:rgb(250, 255, 180);
+        width : 600px;
+    }
+    h1{
+        font-family: Cafe24Danjunghae;
+        color:darkgreen;
+        
+    }
+    .signup{
+        color:red;
+    }
+    </style>
+</head>
+<body>
+    <div class="login">
+    <h1>Login</h1>
+
+    <form method = "POST" action="{% url 'login' %}">
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout">로그아웃</a><br>
+        {{user.username}}님이 로그인 중
+
+        {% else %}
+        로그인 해야됨
+        <a href=" {% provider_login_url 'google' %}"> 구글 로그인</a> <br>
+        
+        {% csrf_token %}
+        Username:
+        <br>
+        <input name="name" type="text" value="">
+        <br>
+        Pssword:
+        <br>
+        <input name="pw" type="password" value="">
+        <br>
+        <br>
+        <input type=submit value="Login">
+        {% endif %}
+        
+    </form>
+    <br>
+    <span>아직 계정이 없으신가요?? <a class="signup" href="/accounts/signup">회원가입</a></span>
+    </div>
+</body>
+{% endblock %}

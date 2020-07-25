@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{%load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>top3 정보</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i96dqr5e15"></script>
+    <style>
+         @font-face { font-family: 'Cafe24Danjunghae'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff'); font-weight: normal; font-style: normal; }
+            
+        .body, .iw_inner{
+            
+            margin: 30px;
+        }
+        span, h3{
+            font-family: Cafe24Danjunghae;
+            color:seagreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+    <h3>top3 주소 정보</h3>
+    <span>1. 제일곱창</span><br>
+    <div id="map" style="width:400px;height:400px;"></div>
+    <br>
+    <span>2. 플롭</span><br>
+    <div id="map2" style="width:400px;height:400px;"></div>
+    <br>
+    <span>3. 월곡 닭갈비</span><br>
+    <div id="map3" style="width:400px;height:400px;"></div>
+
+    <script>
+        var HOME_PATH = window.HOME_PATH || '.';
+
+        var top1 = new naver.maps.LatLng(37.564845,127.036136),
+            map = new naver.maps.Map('map', {
+                center: top1,
+                zoom: 15
+            }),
+            marker = new naver.maps.Marker({
+                map: map,
+                position: top1
+            });
+
+        var contentString = [
+                '<div class="iw_inner">',
+                '   <h3>제일곱창</h3>',
+                '   <p>서울 성동구 고산자로 281<br />',
+                '   </p>',
+                '</div>'
+            ].join('');
+
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString
+        });
+
+        naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map, marker);
+            }
+        });
+
+        infowindow.open(map, marker);
+
+    </script>
+    <script>
+        var HOME_PATH = window.HOME_PATH || '.';
+
+        var top2 = new naver.maps.LatLng(37.5892982,126.9142003),
+            map2 = new naver.maps.Map('map2', {
+                center: top2,
+                zoom: 15
+            }),
+            marker = new naver.maps.Marker({
+                map: map2,
+                position: top2
+            });
+
+        var contentString = [
+                '<div class="iw_inner">',
+                '   <h3>플롭(PLOP)</h3>',
+                '   <p>서울특별시 은평구 응암동 591-19번지 1층<br />',
+                '   </p>',
+                '</div>'
+            ].join('');
+
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString
+        });
+
+        naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map2, marker);
+            }
+        });
+
+        infowindow.open(map2, marker);
+
+    </script>
+
+<script>
+    var HOME_PATH = window.HOME_PATH || '.';
+
+    var top3 = new naver.maps.LatLng(37.6069492,127.0497609),
+        map3 = new naver.maps.Map('map3', {
+            center: top3,
+            zoom: 15
+        }),
+        marker = new naver.maps.Marker({
+            map: map3,
+            position: top3
+        });
+
+    var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>427월곡 닭갈비</h3>',
+            '   <p>서울특별시 성북구 상월곡동 화랑로 170<br />',
+            '   </p>',
+            '</div>'
+        ].join('');
+
+    var infowindow = new naver.maps.InfoWindow({
+        content: contentString
+    });
+
+    naver.maps.Event.addListener(marker, "click", function(e) {
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+            infowindow.open(map3, marker);
+        }
+    });
+
+    infowindow.open(map3, marker);
+
+</script>
+</div>
+</body>
+</html>
+{% endblock %}
